@@ -1,0 +1,50 @@
+.nav-link {
+    position: relative;
+    /* Ensure relative positioning for the ::after pseudo-element */
+}
+
+.nav-link::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 0%;
+    background-color: red;
+    /* Change underline color to red */
+    position: absolute;
+    bottom: -1px;
+    /* Position the underline below the text */
+    left: 0;
+    transition: width 0.3s ease-out;
+    /* Add transition for smooth width change */
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Additional animation for removing the underline */
+.nav-link:not(:hover)::after {
+    width: 0%;
+}
+
+.sidebar-link {
+    color: inherit;
+    /* Use the default text color */
+    transition: color 0.3s;
+    /* Add transition for smooth color change */
+}
+
+.sidebar-link:hover {
+    color: red;
+    /* Change text color to red on hover */
+}
+
+.transition-height {
+    transition: max-height 0.5s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.transition-height.active {
+    max-height: 1000px;
+}

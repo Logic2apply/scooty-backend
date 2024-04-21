@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url("C:\Users\hp\Desktop\black.jpg") no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-color: black;
+
+        }
+
+        h2 {
+            font-size: 2em;
+            text-align: center;
+            color: aliceblue;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: rgb(250, 250, 250);
+            user-select: none;
+        }
+
+        .feedback-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+
+            background: transparent;
+            border: 2px solid rgba(244, 232, 232, 0.412);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(214, 182, 182, 0.5);
+
+        }
+
+        .feedback-form input[type="text"],
+        .feedback-form input[type="email"],
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .feedback-form textarea {
+            height: 150px;
+        }
+
+        .feedback-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .feedback-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .feedback-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: aliceblue;
+        }
+
+        .btn {
+            width: 100%;
+            height: 25px;
+            border-radius: 1rem;
+            background-color: #162938;
+            color: aliceblue;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="logo">ECORIDE<ion-icon name="bicycle"></ion-icon></h1>
+    <div class="feedback-container">
+        <h2>Feedback Form</h2>
+        <form class="feedback-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="" required></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+
+</html>
