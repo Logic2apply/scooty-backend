@@ -45,3 +45,10 @@ class BookRideAdmin(admin.ModelAdmin):
         "biketype",
         "datetimef",
     ]
+
+class EmailSubscribe(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    email = models.EmailField(max_length=100, default="", null=False, unique=True)
+
+    def __str__(self):
+        return self.email

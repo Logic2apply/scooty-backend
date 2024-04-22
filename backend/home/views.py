@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.conf import settings
 from django.core.mail import send_mail
-from home.models import BookRide, Contact
+from home.models import BookRide, Contact, EmailSubscribe
 
 # Create your views here.
 def index(request):
@@ -69,6 +69,33 @@ def bookTestRide(request):
 
         return redirect("/")
 
+def feedback(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        subject = f"Feedback from {name}"
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [settings.EMAIL_HOST_USER]
+        send_mail( subject, f"Message: {message}\n\nSent by:{email}\nECORIDE", email_from, recipient_list )
+        print("Mail sent successfully")
+        return redirect("/feedback/")
+    return render(request, "home/feedback.html")
+
+def emailSubscribe(request):
+    if request.method == "POST":
+        email = request.POST.get("emails")
+
+        subscribe = EmailSubscribe(email=email)
+        subscribe.save()
+        send_mail("Subscribed to ECORIDE", f"Message: {email} subscribed to ECORIDE", settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER, email])
+
+        return redirect("/")
+    return redirect("/")
+
+def about(request):
+    return render(request, "home/about.html")
 
 def b450s(request):
     return render(request, 'home/bikes/450s.html')
