@@ -1,0 +1,687 @@
+<!-- --------------------------VEHICLE.HML-------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vehicles</title>
+    <link rel="stylesheet" href="/static/home/src/output.css">
+    <link rel="stylesheet" href="/static/home/src/homepage.css">
+    <style>
+        .container {
+            display: flex;
+            width: 100%;
+            padding: 4% 2%;
+            box-sizing: border-box;
+            height: 100vh;
+        }
+
+        .box {
+            flex: 1;
+            overflow: hidden;
+            transition: .5s;
+            margin: 0 2%;
+            box-shadow: 0 20px 30px rgba(220, 218, 218, 0.2);
+            color: white;
+            line-height: 0;
+        }
+
+        .box>img {
+            width: 200%;
+            height: calc(100% - 10vh);
+            object-fit: cover;
+            transition: .5s;
+        }
+
+        .box>span {
+            font-size: 3.8vh;
+            display: block;
+            text-align: center;
+            height: 10vh;
+            line-height: 2.6;
+        }
+
+        .box:hover {
+            flex: 1 1 50%;
+        }
+
+        .box:hover>img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex justify-center bg-gray-950">
+        <nav class="self-center w-full max-w-7xl  ">
+            <div class="flex flex-col lg:flex-row justify-between items-center text-white">
+                <h1 class="uppercase pl-5 py-4 text-lg font-sans font-bold">ECORIDE</h1>
+                <ul class="hidden lg:flex items-center text-[18px] font-semibold pl-32">
+                    <li
+                        class="hover:underline  underline-offset-4 decoration-2 decoration-red-500 py-2 rounded-lg px-5">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="hover:underline underline-offset-4 decoration-2 decoration-red-500 py-2 rounded-lg px-5">
+                        <a href="/accessories/">accessories</a>
+                    </li>
+                    <li class="hover:underline underline-offset-4 decoration-2 decoration-red-500 py-2 rounded-lg px-5">
+                        <a href="/auth/signin/">login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <hr>
+
+    <div class="flex justify-center bg-black p-8 ">
+        <div class="flex flex-col justify-center">
+
+            <div class="flex flex-col lg:flex-row max-w-7xl justify-center items-center p-2 space-y-3 w-full">
+                <div class="flex flex-col  text-gray-400 md:items-start items-center justify-between  space-y-3 px-8">
+                    <div class="text-5xl md:text-7xl font-bold ">
+                        Embracing Tomorrow </div>
+                    <div class="text-lg uppercase md:text-3xl   ">
+                        The New Way OF Riding</div>
+                    <div class="text-xl md:text-3xl   ">
+                        @ecoride</div>
+                </div>
+                <div class="container">
+                    <div class="box">
+                        <img
+                            src="https://images.unsplash.com/photo-1519750292352-c9fc17322ed7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c2Nvb3RlcnxlbnwwfHwwfHx8MA%3D%3D">
+                        <span>CHARGE</span>
+                    </div>
+                    <div class="box">
+                        <img
+                            src="https://media.istockphoto.com/id/506466971/photo/italian-old-style-red-scooter-near-a-door.webp?s=170667a&w=0&k=20&c=8iTtU2fZvv6fYQXyye5cewyY7FrcTGAVHFWH0t2P1ZM=">
+                        <span>INTO</span>
+                    </div>
+                    <div class="box">
+                        <img
+                            src="https://images.unsplash.com/photo-1623079478319-945f25f0a97b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHNjb290ZXJ8ZW58MHx8MHx8fDA%3D">
+                        <span>THE</span>
+                    </div>
+                    <div class="box">
+                        <img
+                            src="https://images.unsplash.com/photo-1572182163343-948e9dad021b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEyfHx8ZW58MHx8fHx8">
+                        <span>FUTURE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="flex justify-center py-4 bg-black">
+        <div class="relative">
+            <input type="text" id="searchInput" placeholder="Search for a brand..."
+                class="border border-gray-300 rounded-md px-4 py-2 w-60 focus:outline-none focus:ring focus:border-blue-500 mr-2">
+            <button onclick="searchBrands()"
+                class="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800">Search</button>
+            <button id="backButton" onclick="resetFilter()"
+                class="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 hidden">Back</button>
+        </div>
+    </div>
+    <div class="flex justify-evenly py-4 bg-gray-400">
+        <div class="relative">
+            <label for="mileageRangeDropdown">Filter by Price:</label>
+            <select id="priceRangeDropdown" onchange="filterByPriceRange()">
+                <option value="select all">Select All</option>
+                <option value="5k-60k">50,000 - 60,000</option>
+                <option value="60k-75k">60,000 - 75,000</option>
+                <option value="75k-90k">75,000 - 90,000</option>
+                <option value="90k-1.5lakh">90,000 - 1.5 Lakh</option>
+            </select>
+        </div>
+        <div>
+            <div>
+                <label for="mileageRangeDropdown">Filter by Mileage:</label>
+                <select id="mileageRangeDropdown" onchange="filterByMileageRange()">
+                    <option value="select all">Select All</option>
+                    <option value="50-75">50km/charge - 75km/charge</option>
+                    <option value="75-100">75km/charge - 100km/charge</option>
+                    <option value="100-125">100km/charge - 125km/charge</option>
+                    <option value="125-150">125km/charge - 150km/charge</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+
+    <div id="battReSection" class="bg-gray-300 py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Batt:RE</h2>
+            </div>
+            <!-- text - end -->
+            <div class="grid gap-6 sm:grid-cols-2">
+                <!-- product - start -->
+                <a id="storie" href="storie.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/battre-storie-electric-scooter-1655276023.jpg" loading="lazy"
+                        alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-1,01,999</span>
+                        <span class="text-gray-300">Milage-132km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">Storie</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+
+                <!-- product - start -->
+                <a id="one" href="one.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/one-gallery-9.png" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-73,900</span>
+                        <span class="text-gray-300">Milage-60km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">One</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+                <!-- product - start -->
+                <a id="loev" href="loev.html"
+                    class="group product-price relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/loev65b241e15d2d1.webp" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-59,990</span>
+                        <span class="text-gray-300">Milage-60 Km/Charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">Loev</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="tunwalSection" class="bg-gray-300 py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Tunwal</h2>
+            </div>
+            <!-- text - end -->
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <!-- product - start -->
+                <a id="lithino-li" href="lithino-li.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/lithino-li-2.webp" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-74,990</span>
+                        <span class="text-gray-300">Milage-75km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">LITHINO LI</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+
+
+                <!-- product - start -->
+                <a id="storm-zx" href="stormzx.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/img-20190619-wa0023-jpg-1000x1000.webp" loading="lazy"
+                        alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-90,000</span>
+                        <span class="text-gray-300">Milage-75km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">STORM ZX</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+                <!-- product - start -->
+                <a id="roma" href="roma.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/sddefault.jpg" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-95,000</span>
+                        <span class="text-gray-300">Milage-75km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">ROMA</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+                <!-- product - start -->
+                <a id="mini-lithino" href="mini-lithino.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/tem-g3362399f4020a8e.webp" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-54,990</span>
+                        <span class="text-gray-300">Milage-55km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">MINI LITHINO</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="BenlingSection" class="bg-gray-300 py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Benling</h2>
+            </div>
+            <!-- text - end -->
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <!-- product - start -->
+                <a id="falcon" href="falcon.html"
+                    class="group relative flex h-80 items-end overflow-hidden  rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/falcon.jpg" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-69,540</span>
+                        <span class="text-gray-300">Milage-70km/charge</span> <span
+                            class="text-lg font-semibold text-white lg:text-xl">FALCON</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+
+                <!-- product - start -->
+                <a id="aura-li" href="aura-li.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/benling-india-72913277.webp" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-94,296</span>
+                        <span class="text-gray-300">Milage-120km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">AURA_Li</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+
+                <!-- product - start -->
+                <a id="kriti" href="kriti.html"
+                    class="group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/KRITI.jpg" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-64,151</span>
+                        <span class="text-gray-300">Milage-60km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">KRITI </span>
+                    </div>
+                </a>
+                <!-- product - end -->
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="motionmanSection" class="bg-gray-300 py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">MotionMaN</h2>
+            </div>
+            <!-- text - end -->
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <!-- product - start -->
+                <a id="ezgo" href="ezgo.html"
+                    class="group product-price relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/motionman-ezgo-white-scooters.jpg" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-63,500</span>
+                        <span class="text-gray-300">Milage-60km/charge</span> <span
+                            class="text-lg font-semibold text-white lg:text-xl">EzGo</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+            </div>
+        </div>
+    </div>
+    <div id="AtherSection" class="bg-gray-300 py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Ather</h2>
+
+            </div>
+            <!-- text - end -->
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <!-- product - start -->
+                <a id="450s" href="450s.html"
+                    class="group product-price relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/ather-450s.avif" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-12,2785</span>
+                        <span class="text-gray-300">Milage-115km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">450s</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+                <!-- product - start -->
+                <a id="450x" href="450x.html"
+                    class="group product-price relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-300 p-4 shadow-lg product-card">
+                    <img src="/static/home/pics2/ather-450x-new-base-variant-1.avif" loading="lazy" alt="Photo by Fakurian Design"
+                        class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+                    <div
+                        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                    </div>
+
+                    <div class="relative flex flex-col">
+                        <span class="text-gray-300">Price-12,9000</span>
+                        <span class="text-gray-300">Milage-145km/charge</span>
+                        <span class="text-lg font-semibold text-white lg:text-xl">450x</span>
+                    </div>
+                </a>
+                <!-- product - end -->
+            </div>
+        </div>
+    </div>
+    <hr>
+    <footer class="text-gray-400 bg-gray-900 body-font">
+        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+            <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+
+                <span class="ml-3 text-xl">ECORIDE</span>
+            </a>
+            <p class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4"> ©
+                2024 EcoRide
+            </p>
+            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                <a class="text-gray-400">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-400">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path
+                            d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-400">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-400">
+                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path stroke="none"
+                            d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                        </path>
+                        <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </footer>
+    <script>
+        function searchBrands() {
+            // Get the search input value
+            var searchValue = document.getElementById('searchInput').value.toLowerCase();
+
+            // Get all the brand headings
+            var brandHeadings = document.querySelectorAll('h2');
+
+            // Loop through each brand heading to check if it matches the search value
+            brandHeadings.forEach(function (heading) {
+                var brandName = heading.textContent.toLowerCase();
+                var productSection = heading.closest('.bg-gray-300'); // Get the parent section of the brand heading
+
+                // Check if the brand name contains the search value
+                if (brandName.includes(searchValue)) {
+                    productSection.style.display = 'block'; // Show the section
+                } else {
+                    productSection.style.display = 'none'; // Hide the section if not a match
+                }
+            });
+
+            // Show the back button if filtering is applied
+            var backButton = document.getElementById('backButton');
+            backButton.classList.remove('hidden');
+
+            // Hide the topmost section containing various images
+            var topSection = document.querySelector('.flex.justify-center.bg-gray-300.p-8');
+            topSection.style.display = 'none';
+        }
+
+        function resetFilter() {
+            // Clear the search input
+            document.getElementById('searchInput').value = '';
+
+            // Show all sections that were hidden during filtering
+            var hiddenSections = document.querySelectorAll('.bg-gray-300[style="display: none;"]');
+            hiddenSections.forEach(function (section) {
+                section.style.display = 'block';
+            });
+
+            // Hide the back button and show the search box only
+            var backButton = document.getElementById('backButton');
+            backButton.classList.add('hidden');
+
+            var searchBox = document.querySelector('.relative');
+            searchBox.style.display = 'block';
+
+            // Show the topmost section containing various images
+            var topSection = document.querySelector('.flex.justify-center.bg-gray-300.p-8');
+            topSection.style.display = 'block';
+        }
+
+        function searchBrands() {
+            // Get the search input value
+            var searchValue = document.getElementById('searchInput').value.toLowerCase();
+
+            // Get all the brand headings
+            var brandHeadings = document.querySelectorAll('h2');
+
+            // Loop through each brand heading to check if it matches the search value
+            brandHeadings.forEach(function (heading) {
+                var brandName = heading.textContent.toLowerCase();
+                var productSection = heading.closest('.bg-gray-300'); // Get the parent section of the brand heading
+
+                // Check if the brand name contains the search value
+                if (brandName.includes(searchValue)) {
+                    productSection.style.display = 'block'; // Show the section
+                } else {
+                    productSection.style.display = 'none'; // Hide the section if not a match
+                }
+            });
+
+            // Show the back button if filtering is applied
+            var backButton = document.getElementById('backButton');
+            backButton.classList.remove('hidden');
+
+            // Hide the topmost section containing various images
+            var topSection = document.querySelector('.flex.justify-center.bg-gray-300.p-8');
+            topSection.style.display = 'none';
+        }
+
+        function resetFilter() {
+            // Clear the search input
+            document.getElementById('searchInput').value = '';
+
+            // Show all sections that were hidden during filtering
+            var hiddenSections = document.querySelectorAll('.bg-gray-300[style="display: none;"]');
+            hiddenSections.forEach(function (section) {
+                section.style.display = 'block';
+            });
+
+            // Hide the back button and show the search box only
+            var backButton = document.getElementById('backButton');
+            backButton.classList.add('hidden');
+
+            var searchBox = document.querySelector('.relative');
+            searchBox.style.display = 'block';
+
+            // Show the topmost section containing various images
+            var topSection = document.querySelector('.flex.justify-center.bg-gray-300.p-8');
+            topSection.style.display = 'block';
+        }
+
+        function filterByPriceRange() {
+            // Get the selected value from the dropdown
+            var selectedRange = document.getElementById('priceRangeDropdown').value;
+
+            // Get all the product cards
+            var productCards = document.querySelectorAll('.product-card');
+
+            // Loop through each product card to check the price range
+            productCards.forEach(function (card) {
+                var priceElement = card.querySelector('.text-gray-300'); // Assuming the price is in an element with this class
+
+                if (priceElement) {
+                    // Remove commas from the price before parsing
+                    var priceText = priceElement.innerText.split('-')[1].replace(/,/g, '');
+                    var price = parseInt(priceText); // Convert to integer
+
+                    // Check if the selected value is "Select All" and display all cards
+                    if (selectedRange === 'select all') {
+                        card.style.display = 'block'; // Show the card
+                    } else {
+                        // Check if the price falls within the selected range
+                        if (selectedRange === '5k-60k' && price >= 5000 && price <= 60000) {
+                            card.style.display = 'block'; // Show the card
+                        } else if (selectedRange === '60k-75k' && price > 60000 && price <= 75000) {
+                            card.style.display = 'block'; // Show the card
+                        } else if (selectedRange === '75k-90k' && price > 75000 && price <= 90000) {
+                            card.style.display = 'block'; // Show the card
+                        } else if (selectedRange === '90k-1.5lakh' && price > 90000 && price <= 150000) {
+                            card.style.display = 'block'; // Show the card
+                        } else if (selectedRange === '<1.5lakhs' && price < 150000) {
+                            card.style.display = 'block'; // Show the card
+                        } else {
+                            card.style.display = 'none'; // Hide the card if not in the selected range
+                        }
+                    }
+                }
+            });
+
+            // Hide sections with no visible products after filtering
+            hideEmptySections();
+        }
+
+        // Function to filter products by mileage range
+        function filterByMileageRange() {
+            const selectedRange = document.getElementById('mileageRangeDropdown').value;
+            const products = document.querySelectorAll('.relative');
+
+            products.forEach(product => {
+                const mileageSpan = product.querySelector('.text-gray-300:nth-of-type(2)');
+                if (mileageSpan) {
+                    const mileageText = mileageSpan.textContent;
+                    const mileage = parseInt(mileageText.match(/\d+/)[0]);
+
+                    if (selectedRange === 'select all' || isMileageInRange(mileage, selectedRange)) {
+                        product.style.display = ''; // Show the product if it falls within the selected range
+                    } else {
+                        product.style.display = 'none'; // Hide the product if it doesn't fall within the selected range
+                    }
+                }
+            });
+        }
+
+        // Helper function to check if a mileage value falls within a given range
+        function isMileageInRange(mileage, range) {
+            const [min, max] = range.split('-').map(Number);
+            return mileage >= min && mileage <= max;
+        }
+
+
+
+
+
+        function hideEmptySections() {
+            // Get all section IDs
+            var sectionIds = ['battReSection', 'tunwalSection', 'BenlingSection', 'motionmanSection', 'AtherSection'];
+
+            // Loop through each section and check if it has visible products
+            sectionIds.forEach(function (sectionId) {
+                var section = document.getElementById(sectionId);
+                var visibleProducts = section.querySelectorAll('.product-card[style="display: block;"]');
+
+                // If no visible products, hide the section
+                if (visibleProducts.length === 0) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+        }
+
+    </script>
+
+
+</body>
+
+</html>
