@@ -1,3 +1,4 @@
+from os import name
 from django.db import models
 from django.contrib import admin
 
@@ -19,4 +20,28 @@ class ContactAdmin(admin.ModelAdmin):
         "lname",
         "email",
         "message",
+    ]
+
+
+class BookRide(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    name = models.TextField(max_length=100, default="", null=False)
+    email = models.EmailField(max_length=100, default="", null=False)
+    contact = models.IntegerField(default=0, null=False)
+    other = models.TextField(max_length=100, default='')
+    biketype = models.TextField(max_length=250, default="", null=False)
+    datetimef = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name + " " + self.email + " " + str(self.contact) + " " + self.other + " " + self.biketype + " " + str(self.datetimef)
+
+class BookRideAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "name",
+        "email",
+        "contact",
+        "other",
+        "biketype",
+        "datetimef",
     ]

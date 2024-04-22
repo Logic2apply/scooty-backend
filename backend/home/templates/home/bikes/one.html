@@ -1,0 +1,838 @@
+<!-- product1.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE</title>
+    <link rel="stylesheet" href="/static/home/src/output.css">
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: #8e8b8b;
+            color: #eee;
+        }
+
+        :root {
+            --primary-color: #dc2626;
+            --text-dark: #171717;
+            --text-light: #78716c;
+            --extra-light: #f9f9f9;
+            --white: #ffffff;
+            --black: #000000;
+            --max-width: 1200px;
+        }
+
+        .contr {
+            margin-top: 68px;
+            width: 100%;
+            height: 150vh;
+            background-size: cover;
+            background-position: center;
+            padding: 20px 10%;
+            transition: background-image 0.3s;
+        }
+
+        .cont {
+            margin-top: 10%;
+        }
+
+        .cont h2 {
+            color: red;
+            font-size: 34px;
+        }
+
+        .cont h1 {
+            font-size: 100px;
+            color: rgb(153, 231, 28);
+            margin-top: -25px;
+        }
+
+        .cont p {
+            max-width: 380px;
+            font-weight: 500;
+            font-size: 22px;
+            color: rgba(214, 38, 11, 0.911);
+        }
+
+        .cont h3 {
+            margin-top: 30px;
+            font-weight: 600;
+            font-size: 24px;
+            color: rgba(129, 125, 125, 0.911);
+        }
+
+        .col-select {
+            display: flex;
+            margin-top: 30px;
+        }
+
+        .col-select div {
+            background: #555;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid black;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .col-select #red {
+            background-color: white;
+        }
+
+        .col-select #blue {
+            background-color: red;
+        }
+
+        .col-select #black {
+            background-color: black;
+        }
+
+
+
+
+
+        svg {
+            width: 25px;
+        }
+
+        /* css slider */
+        .slider {
+            height: 100vh;
+            margin-top: 70px;
+            position: relative;
+        }
+
+        .slider .list .item {
+            position: absolute;
+            inset: 0 0 0 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: .5s;
+        }
+
+        .slider .list .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider .list .item::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-image: linear-gradient(to top, #000 10%, transparent);
+        }
+
+        .slider .list .item .content {
+            position: absolute;
+            left: 10%;
+            top: 20%;
+            width: 500px;
+            max-width: 80%;
+            z-index: 1;
+        }
+
+        .slider .list .item .content p:nth-child(1) {
+            text-transform: uppercase;
+            letter-spacing: 10px;
+        }
+
+        .slider .list .item .content h2 {
+            font-size: 100px;
+            margin: 0;
+        }
+
+        .slider .list .item.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        @keyframes showContent {
+            to {
+                transform: translateY(0);
+                filter: blur(0);
+                opacity: 1;
+            }
+        }
+
+        .slider .list .item.active p:nth-child(1),
+        .slider .list .item.active h2,
+        .slider .list .item.active p:nth-child(3) {
+            transform: translateY(30px);
+            filter: blur(20px);
+            opacity: 0;
+            animation: showContent .5s .7s ease-in-out 1 forwards;
+        }
+
+        .slider .list .item.active h2 {
+            animation-delay: 1s;
+        }
+
+        .slider .list .item.active p:nth-child(3) {
+            animation-duration: 1.3s;
+        }
+
+        .arrows {
+            position: absolute;
+            top: 30%;
+            right: 50px;
+            z-index: 100;
+        }
+
+        .arrows button {
+            background-color: #eee5;
+            border: none;
+            font-family: monospace;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            font-size: x-large;
+            color: #eee;
+            transition: .5s;
+        }
+
+        .arrows button:hover {
+            background-color: #eee;
+            color: black;
+        }
+
+        .thumbnail {
+            position: absolute;
+            bottom: -170px;
+            z-index: 11;
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            height: 250px;
+            padding: 0 50px;
+            box-sizing: border-box;
+            overflow: auto;
+            justify-content: center;
+        }
+
+        .thumbnail::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .thumbnail .item {
+            width: 150px;
+            height: 220px;
+            filter: brightness(.5);
+            transition: .5s;
+            flex-shrink: 0;
+        }
+
+        .thumbnail .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .thumbnail .item.active {
+            filter: brightness(1);
+        }
+
+        .thumbnail .item .content {
+            position: absolute;
+            inset: auto 10px 10px 10px;
+        }
+
+        @media screen and (max-width: 678px) {
+            .thumbnail {
+                justify-content: start;
+            }
+
+            .slider .list .item .content h2 {
+                font-size: 60px;
+            }
+
+            .arrows {
+                top: 10%;
+            }
+        }
+
+
+        .feature {
+            font-weight: 700;
+            font-size: 20px;
+            margin: 14rem 0;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .feature::before,
+        .feature::after {
+            position: absolute;
+            content: "";
+            background-color: var(--black);
+            inset: 0;
+            z-index: -1;
+        }
+
+        .feature::before {
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0% 100%);
+            transform: skewY(8deg);
+        }
+
+        .feature::after {
+            -webkit-clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 100%);
+            clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 100%);
+            transform: skewY(-8deg)
+        }
+
+        .feature__container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .feature__image img {
+            max-width: 550px;
+            margin: auto;
+        }
+
+        .feature__content {
+            margin: auto;
+        }
+
+        .feature__content .section__header {
+            width: 100%;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .feature__content ul {
+            list-style: none;
+            max-width: 400px;
+        }
+
+        .feature__content li {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            color: var(--white);
+        }
+
+        .feature__content li::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            top: 5px;
+            height: 12px;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .gallery__container .section__header {
+            width: 100%;
+        }
+
+        .gallery__grid {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .gallery__col:nth-child(2) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+
+        @media (width < 600px) {
+            .nav__links {
+                display: none;
+            }
+
+            .evolution__grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 5rem;
+            }
+
+            .gallery__grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header
+        class="fixed top-0 left-0 right-0  z-50 text-gray-400 bg-gray-950 body-font transition-all duration-500 ease-in-out">
+        <div id="navContainer" class="container  flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+            <a href="#" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                <span class="ml-3 text-xl">ECORIDE</span>
+            </a>
+            <div id="navLinks"
+                class=" decoration-2 text-white hidden md:flex flex-wrap items-center text-base justify-center md:justify-end space-x-4">
+                <a href="/vehicle/" class="nav-link ">VEHICLES</a>
+                <a href="/accessories/" class="nav-link">ACCESSORIES</a>
+                <a href="/contact/" class="nav-link">CONTACT US</a>
+                <a href="/signin/" class="nav-link">LOGIN</a>
+            </div>
+            <button id="toggleNav"
+                class="md:hidden inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-red-600 hover:text-black rounded text-base mt-4 md:mt-0">Menu
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="sidebar"
+            class="md:hidden fixed inset-0 bg-stone-800 bg-opacity-50 z-40 w-0 h-full overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="flex justify-end p-4">
+                <button id="closeNav" class="text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class=" decoration-2 text-white flex flex-col items-center justify-center h-full">
+                <a href="/accessories/" class="sidebar-link my-4">ACCESSORIES</a>
+                <a href="/contact/" class="sidebar-link my-4">CONTACT US</a>
+                <a href="/signin/" class="sidebar-link my-4">LOGIN</a>
+            </div>
+        </div>
+    </header>
+    <hr>
+
+    <div class="contr " id="bike">
+        <div class="cont">
+            <h2>BATT:RE</h2>
+            <h1>ONE</h1>
+            <p> Urban Confidence Redefined.</p>
+            <h3>choose your color</h3>
+            <div class="col-select">
+                <div id="red"></div>
+                <div id="black"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- slider -->
+
+    <div class="slider">
+        <!-- list Items -->
+        <div class="list">
+            <div class="item active">
+                <img src="/static/home/products-pics\one-gallery-3 (1).png">
+                <div class="content"> </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-2.png">
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-7.png">
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-9.png">
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-6.png">
+                <div class="content">
+                </div>
+            </div>
+        </div>
+        <!-- button arrows -->
+        <div class="arrows">
+            <button id="prev">
+                < </button>
+                    <button id="next">></button>
+        </div>
+        <!-- thumbnail -->
+        <div class="thumbnail">
+            <div class="item active">
+                <img src="/static/home/products-pics\one-gallery-3 (1).png">
+                <div class="content">
+                    1
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-2.png">
+                <div class="content">
+                    2
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-7.png">
+                <div class="content">
+                    3
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-9.png">
+                <div class="content">
+                    4
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\one-gallery-6.png">
+                <div class="content">
+                    5
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="feature">
+        <div class="section__container feature__container">
+            <div class="feature__image">
+                <img src="/static/home/products-pics\one-gallery-4.png" alt="feature" />
+            </div>
+            <div class="feature__content">
+                <h2 class="section__header">DETAILS</h2>
+                <ul>
+                    <li>
+                        SINGLE CYLINDER, FOUR STROKE, LIQUID COOLED, SI ENGINE, DOHC BSVVI
+                        COMPLIANT
+                    </li>
+                    <li>CONSTANT MESH 6 SPPEED</li>
+                    <li>MONO SHOCK ABSORBER, 7 STEP ADJUSTABLE</li>
+                    <li>DISC WITH FLOATING CALIPER AND ABS</li>
+                    <li>DOUBLE CRADLE TUBULAR FRAME</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="text-gray-400 body-font bg-gray-900">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+                <h1 class="sm:text-3xl text-2xl font-medium  title-font mb-2 text-white">FEATURES
+                </h1>
+                <div class="h-1 w-20 bg-red-500 rounded"></div>
+            </div>
+            <div class="flex flex-wrap justify-evenly -m-4">
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
+                            src="/static/home/products-pics\istockphoto-1379109491-640x640.jpg" alt="content">
+                        <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">Detachable LFO/NMC
+                            Battery
+                        </h3>
+                    </div>
+                </div>
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
+                            src="/static/home/products-pics\usb-charging-plug-icon-vector-22619111.jpg" alt="content">
+                        <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">USB Charger
+                        </h3>
+                    </div>
+                </div>
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
+                            src="/static/home/products-pics\security-shield-icon-padlock-symbol-600nw-1018695001.webp"
+                            alt="content">
+                        <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">Remote Key & Anti
+                            Theft Alarm
+                            pack</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="text-gray-400 bg-black body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">BOOK A TEST RIDE NOW!</h1>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <form id="myForm" action="/book-test-ride/" method="POST" class="flex flex-col">
+                    {% csrf_token %}
+                    <div class="relative flex-grow mb-4">
+                        <label for="full-name" class="leading-7 text-sm text-gray-400">Full Name</label>
+                        <input type="text" id="full-name" name="name" placeholder="Name" autocomplete="off"
+                            class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
+                    <div class="relative flex-grow mb-4">
+                        <label for="email" class="leading-7 text-sm text-gray-400">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email" autocomplete="off"
+                            class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
+                    <!-- Hidden items -->
+                    <div id="hidden-items" class="hidden transition-height">
+                        <div class="flex flex-col">
+                            <div class="relative mb-4">
+                                <label for="contact" class="leading-7 text-sm text-gray-400">Contact</label>
+                                <input type="number" id="contact" name="contact" placeholder="Contact" autocomplete="off"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="details" class="leading-7 text-sm text-gray-400">Other Details</label>
+                                <input type="text" id="details" name="other" placeholder="Any other details" autocomplete="off"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="type" class="leading-7 text-sm text-gray-400">Bike Type</label>
+                                <select id="biketype"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-400  py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                    name="biketype">
+                                    <option class="bg-black" value="0">
+                                        Select an option
+                                    </option>
+                                    <option class="bg-black" value="a">
+                                        a
+                                    </option>
+                                    <option class="bg-black" value="b">
+                                        b
+                                    </option>
+                                    <option class="bg-black" value="c">
+                                        c
+                                    </option>
+                                    <option class="bg-black" value="d">
+                                        d
+                                    </option>
+                                    <option class="bg-black" value="e">
+                                        e
+                                    </option>
+                                    <option class="bg-black" value="f">
+                                        f
+                                    </option>
+                                </select>
+                                </label>
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="datetime" class="leading-7 text-sm text-gray-400">Date and Time</label>
+                                <input type="datetime-local" id="datetime" name="datetime" placeholder="Date-Time" autocomplete="off"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-400 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
+                            <button type="submit" id="relative"
+                                class="text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-800 hover:text-black rounded text-lg">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Button to show/hide hidden items -->
+                <div class="flex justify-center">
+                    <button id="toggle-btn"
+                        class="text-white bg-red-700 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                        SHOW MORE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+    <footer class="text-gray-400 bg-gray-900 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap md:text-left text-center order-first">
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-400 hover:text-white">First Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Second Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Third Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-400 hover:text-white">First Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Second Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Third Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-400 hover:text-white">First Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Second Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Third Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">SUBSCRIBE</h2>
+                    <div
+                        class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
+                        <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
+                            <label for="footer-field" class="leading-7 text-sm text-gray-400">Email</label>
+                            <input type="text" id="footer-field" name="footer-field"
+                                class="w-full bg-gray-800 rounded border bg-opacity-40 border-gray-700 focus:bg-transparent focus:ring-2 focus:ring-indigo-900 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                        <button
+                            class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-red-700 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Submit</button>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-2 md:text-left text-center">get latest updates
+                        <br class="lg:block hidden">waistcoat green juice
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-800 bg-opacity-75">
+            <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+                    <span class="ml-3 text-xl">ECORIDE</span>
+                </a>
+                <p class="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2024 ECORIDE
+
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                    <a class="text-gray-400">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-400">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-400">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-400">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/home/src/homepage.js"></script>
+    <script>
+        let items = document.querySelectorAll('.slider .list .item');
+        let next = document.getElementById('next');
+        let prev = document.getElementById('prev');
+        let thumbnails = document.querySelectorAll('.thumbnail .item');
+
+        let redbtn = document.querySelector('#red');
+        let bluebtn = document.querySelector('#blue');
+        let blackbtn = document.querySelector('#black');
+        let bike = document.querySelector('#bike');
+
+        // config param
+        let countItem = items.length;
+        let itemActive = 0;
+        // event next click
+        next.onclick = function () {
+            itemActive = itemActive + 1;
+            if (itemActive >= countItem) {
+                itemActive = 0;
+            }
+            showSlider();
+        }
+        //event prev click
+        prev.onclick = function () {
+            itemActive = itemActive - 1;
+            if (itemActive < 0) {
+                itemActive = countItem - 1;
+            }
+            showSlider();
+        }
+        // auto run slider
+        let refreshInterval = setInterval(() => {
+            next.click();
+        }, 5000)
+        function showSlider() {
+            // remove item active old
+            let itemActiveOld = document.querySelector('.slider .list .item.active');
+            let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
+            itemActiveOld.classList.remove('active');
+            thumbnailActiveOld.classList.remove('active');
+
+            // active new item
+            items[itemActive].classList.add('active');
+            thumbnails[itemActive].classList.add('active');
+
+            // clear auto time run slider
+            clearInterval(refreshInterval);
+            refreshInterval = setInterval(() => {
+                next.click();
+            }, 5000)
+        }
+
+        // click thumbnail
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', () => {
+                itemActive = index;
+                showSlider();
+            })
+        })
+
+        bike.style.backgroundImage = 'url(/static/home/products-pics/one-3.png)';
+        redbtn.onclick = function () {
+            bike.style.backgroundImage = 'url(/static/home/products-pics/one-3.png)';
+        }
+        blackbtn.onclick = function () {
+            bike.style.backgroundImage = 'url(/static/home/products-pics/battre-one-black-electric-scooter.jpg)';
+        }
+    </script>
+</body>
+
+</html>

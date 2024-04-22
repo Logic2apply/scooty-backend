@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>homepage</title>
     <link rel="stylesheet" href="/static/home/src/output.css">
-    <link rel="stylesheet" href="/static/home/srchomepage.css">
+    <link rel="stylesheet" href="/static/home/src/homepage.css">
 
     <head>
         <!-- Other meta tags, links, and scripts -->
@@ -81,7 +81,7 @@
                     <div class="flex flex-wrap w-1/2 bg-[url('pics\bg-img.avif')]">
                         <div class="md:p-2 p-1 w-1/2 relative">
                             <div class="relative w-full h-full overflow-hidden group">
-                                <a href="page1.html" class="block w-full h-full relative overflow-hidden group">
+                                <a href="/lithinoli/" class="block w-full h-full relative overflow-hidden group">
                                     <img alt="gallery"
                                         class="w-full h-full object-cover object-center block transition-all duration-1000 transform group-hover:translate-x-full"
                                         src="/static/home/pics\product-jpeg.jpg">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="md:p-2 p-1 w-1/2 relative">
                             <div class="relative w-full h-full overflow-hidden group">
-                                <a href="page2.html" class="block w-full h-full relative overflow-hidden group">
+                                <a href="/450s/" class="block w-full h-full relative overflow-hidden group">
                                     <img alt="gallery"
                                         class="w-full h-full object-cover object-center block transition-all duration-1000 transform group-hover:translate-x-full"
                                         src="/static/home/pics\Screenshot 2024-03-27 144545.png">
@@ -103,7 +103,7 @@
                         </div>
                         <div class="md:p-2 p-1 w-full">
                             <div class="relative w-full h-full">
-                                <a href="page3.html" class="block w-full h-full relative overflow-hidden group">
+                                <a href="/one/" class="block w-full h-full relative overflow-hidden group">
                                     <img alt="gallery"
                                         class="w-full h-full object-cover object-center block transition-transform duration-1000 transform group-hover:translate-x-full"
                                         src="/static/home/pics\Screenshot 2024-03-27 145039-abc.png">
@@ -116,7 +116,7 @@
                     <div class="flex flex-wrap w-1/2">
                         <div class="md:p-2 p-1 w-full">
                             <div class="relative w-full h-full">
-                                <a href="page4.html" class="block w-full h-full relative overflow-hidden group">
+                                <a href="/storie/" class="block w-full h-full relative overflow-hidden group">
                                     <img alt="gallery"
                                         class="w-full h-full object-cover object-center block transition-transform duration-1000 transform group-hover:translate-x-full"
                                         src="/static/home/pics\storie Image 2024-04-07 at 10.26.32_cafe81b9.jpg">
@@ -127,7 +127,7 @@
                         </div>
                         <div class="md:p-2 p-1 w-1/2">
                             <div class="relative w-full h-full">
-                                <a href="page5.html" class="block w-full h-full relative overflow-hidden group">
+                                <a href="/falcon/" class="block w-full h-full relative overflow-hidden group">
                                     <img alt="gallery"
                                         class="w-full h-full object-cover object-center block transition-transform duration-1000 transform group-hover:translate-x-full"
                                         src="/static/home/pics\Screenshot 2024-03-27 142511.png">
@@ -138,7 +138,7 @@
                         </div>
                         <div class="md:p-2 p-1 w-1/2">
                             <div class="relative w-full h-full">
-                                <a href="page6.html" class="block w-full h-full relative overflow-hidden group">
+                                <a href="/ezgo/" class="block w-full h-full relative overflow-hidden group">
                                     <img alt="gallery"
                                         class="w-full h-full object-cover object-center block transition-transform duration-1000 transform group-hover:translate-x-full"
                                         src="/static/home/pics\EZGO Image 2024-04-07 at 10.39.43_9f6c1454.jpg">
@@ -164,7 +164,7 @@
                         src="/static/home/pics\360_F_162708208_zAlCalbrT9Q1Bbv2tBzM1krl4X6fsVGh.jpg">
                     <h2 class="font-medium text-lg text-white">REQUEST A CALLBACK</h2>
                 </a>
-                <a href="page2.html"
+                <a href="/450s/"
                     class="p-4 bg-gray-800 rounded-lg flex flex-col items-center justify-center hover:bg-gray-700">
                     <img alt="team" class="w-48 h-48 object-cover object-center mb-4" src="/static/home/pics\images.jpeg">
                     <h2 class="font-medium text-lg text-white">LATEST ARRIVALS</h2>
@@ -186,10 +186,11 @@
                 <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">BOOK A TEST RIDE NOW!</h1>
             </div>
             <div class="max-w-3xl mx-auto">
-                <form id="myForm" action="your-server-url" method="POST" class="flex flex-col">
+                <form id="myForm" action="/book-test-ride/" method="POST" class="flex flex-col">
+                    {% csrf_token %}
                     <div class="relative flex-grow mb-4">
                         <label for="full-name" class="leading-7 text-sm text-gray-400">Full Name</label>
-                        <input type="text" id="full-name" name="full-name" placeholder="Name" autocomplete="off"
+                        <input type="text" id="full-name" name="name" placeholder="Name" autocomplete="off"
                             class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     </div>
                     <div class="relative flex-grow mb-4">
@@ -208,34 +209,34 @@
                             </div>
                             <div class="relative mb-4">
                                 <label for="details" class="leading-7 text-sm text-gray-400">Other Details</label>
-                                <input type="text" id="details" name="details" placeholder="Any other details"
+                                <input type="text" id="details" name="other" placeholder="Any other details"
                                     autocomplete="off"
                                     class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
                             <div class="relative mb-4">
                                 <label for="type" class="leading-7 text-sm text-gray-400">Bike Type</label>
-                                <select id="animals"
+                                <select id="biketype"
                                     class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-400  py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    name="animals">
-                                    <option class="bg-black" value="">
+                                    name="biketype">
+                                    <option class="bg-black" value="0">
                                         Select an option
                                     </option>
-                                    <option class="bg-black" value="">
+                                    <option class="bg-black" value="a">
                                         a
                                     </option>
-                                    <option class="bg-black" value="">
+                                    <option class="bg-black" value="b">
                                         b
                                     </option>
-                                    <option class="bg-black" value="">
+                                    <option class="bg-black" value="c">
                                         c
                                     </option>
-                                    <option class="bg-black" value="">
+                                    <option class="bg-black" value="d">
                                         d
                                     </option>
-                                    <option class="bg-black" value="">
+                                    <option class="bg-black" value="e">
                                         e
                                     </option>
-                                    <option class="bg-black" value="">
+                                    <option class="bg-black" value="f">
                                         f
                                     </option>
                                 </select>
@@ -397,7 +398,7 @@
             </div>
         </div>
     </footer>
-    <script src="/static/home//static/home/srchomepage.js"></script>
+    <script src="/static/home/src/homepage.js"></script>
 </body>
 
 </html>

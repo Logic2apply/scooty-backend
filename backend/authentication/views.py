@@ -46,3 +46,5 @@ def signout(request):
     logout(request)
     messages.success(request, "You are now logged out!")
     return redirect("signin")
+
+

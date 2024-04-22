@@ -1,0 +1,409 @@
+<!-- product1.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storie</title>
+    <link rel="stylesheet" href="/static/home/src/output.css">
+    <link rel="stylesheet" href="/static/home/products-edit/product-style.css">
+</head>
+
+<body>
+    <header
+        class="fixed top-0 left-0 right-0  z-50 text-gray-400 bg-gray-950 body-font transition-all duration-500 ease-in-out">
+        <div id="navContainer" class="container  flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+            <a href="#" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+                <span class="ml-3 text-xl">ECORIDE</span>
+            </a>
+            <div id="navLinks"
+                class=" decoration-2 text-white hidden md:flex flex-wrap items-center text-base justify-center md:justify-end space-x-4">
+                <a href="/vehicle/" class="nav-link ">VEHICLES</a>
+                <a href="/accessories/" class="nav-link">ACCESSORIES</a>
+                <a href="/contact/" class="nav-link">CONTACT US</a>
+                <a href="/signin/" class="nav-link">LOGIN</a>
+            </div>
+            <button id="toggleNav"
+                class="md:hidden inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-red-600 hover:text-black rounded text-base mt-4 md:mt-0">Menu
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="sidebar"
+            class="md:hidden fixed inset-0 bg-stone-800 bg-opacity-50 z-40 w-0 h-full overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="flex justify-end p-4">
+                <button id="closeNav" class="text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                        <path d="M18 6L6 18M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class=" decoration-2 text-white flex flex-col items-center justify-center h-full">
+                <a href="/accessories/" class="sidebar-link my-4">ACCESSORIES</a>
+                <a href="/contact/" class="sidebar-link my-4">CONTACT US</a>
+                <a href="/signin/" class="sidebar-link my-4">LOGIN</a>
+            </div>
+        </div>
+    </header>
+    <hr>
+
+    <div class="contr " id="bike">
+        <div class="cont">
+            <h2>BATT:RE</h2>
+            <h1>Storie</h1>
+            <p> a modern-day e-scooter with metal panels, and a connected drive, and is well-suited for daily urban
+                commutes.</p>
+            <h3>choose your color</h3>
+            <div class="col-select">
+                <div id="red"></div>
+                <div id="blue"></div>
+                <div id="black"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- slider -->
+
+    <div class="slider">
+        <!-- list Items -->
+        <div class="list">
+            <div class="item active">
+                <img src="/static/home/products-pics\battre-storie-1.jpg">
+                <div class="content"> </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\battre-storie-electric-scooter.jpg">
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\storie-gallery-1-1.png">
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\storie-gallery-6-1.png">
+                <div class="content">
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\power.png">
+                <div class="content">
+                </div>
+            </div>
+        </div>
+        <!-- button arrows -->
+        <div class="arrows">
+            <button id="prev">
+            </button>
+            <button id="next">></button>
+        </div>
+        <!-- thumbnail -->
+        <div class="thumbnail">
+            <div class="item active">
+                <img src="/static/home/products-pics\battre-storie-1.jpg">
+                <div class="content">
+                    1
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\battre-storie-electric-scooter.jpg">
+                <div class="content">
+                    2
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\storie-gallery-1-1.png">
+                <div class="content">
+                    3
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\storie-gallery-6-1.png">
+                <div class="content">
+                    4
+                </div>
+            </div>
+            <div class="item">
+                <img src="/static/home/products-pics\power.png">
+                <div class="content">
+                    5
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="feature">
+        <div class="section__container feature__container">
+            <div class="feature__image">
+                <img src="/static/home/pics2\front-left-view-1119382577_930x620-removebg-preview.webp" alt="feature" />
+            </div>
+            <div class="feature__content">
+                <h2 class="section__header">DETAILS</h2>
+                <ul>
+                    <li>
+                        SINGLE CYLINDER, FOUR STROKE, LIQUID COOLED, SI ENGINE, DOHC BSVVI
+                        COMPLIANT
+                    </li>
+                    <li>CONSTANT MESH 6 SPPEED</li>
+                    <li>MONO SHOCK ABSORBER, 7 STEP ADJUSTABLE</li>
+                    <li>DISC WITH FLOATING CALIPER AND ABS</li>
+                    <li>DOUBLE CRADLE TUBULAR FRAME</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="text-gray-400 body-font bg-gray-900">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+                <h1 class="sm:text-3xl text-2xl font-medium  title-font mb-2 text-white">FEATURES
+                </h1>
+                <div class="h-1 w-20 bg-red-500 rounded"></div>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
+                            src="/static/home/products-pics\metal-panel-2.png" alt="content">
+                        <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">Stylish methal panels
+                        </h3>
+                    </div>
+                </div>
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
+                            src="/static/home/products-pics\screen-2.png" alt="content">
+                        <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">5" TFT screen</h3>
+                    </div>
+                </div>
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
+                            src="/static/home/products-pics\battery-pack-1.png" alt="content">
+                        <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">Detachable battrey
+                            pack</h3>
+                    </div>
+                </div>
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
+                            src="/static/home/products-pics\range.png" alt="content">
+                        <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">132km(IDC) range</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="text-gray-400 bg-black body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">BOOK A TEST RIDE NOW!</h1>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <form id="myForm" action="/book-test-ride/" method="POST" class="flex flex-col">
+                    {% csrf_token %}
+                    <div class="relative flex-grow mb-4">
+                        <label for="full-name" class="leading-7 text-sm text-gray-400">Full Name</label>
+                        <input type="text" id="full-name" name="name" placeholder="Name" autocomplete="off"
+                            class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
+                    <div class="relative flex-grow mb-4">
+                        <label for="email" class="leading-7 text-sm text-gray-400">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email" autocomplete="off"
+                            class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
+                    <!-- Hidden items -->
+                    <div id="hidden-items" class="hidden transition-height">
+                        <div class="flex flex-col">
+                            <div class="relative mb-4">
+                                <label for="contact" class="leading-7 text-sm text-gray-400">Contact</label>
+                                <input type="number" id="contact" name="contact" placeholder="Contact" autocomplete="off"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="details" class="leading-7 text-sm text-gray-400">Other Details</label>
+                                <input type="text" id="details" name="other" placeholder="Any other details" autocomplete="off"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="type" class="leading-7 text-sm text-gray-400">Bike Type</label>
+                                <select id="biketype"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-400  py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                    name="biketype">
+                                    <option class="bg-black" value="0">
+                                        Select an option
+                                    </option>
+                                    <option class="bg-black" value="a">
+                                        a
+                                    </option>
+                                    <option class="bg-black" value="b">
+                                        b
+                                    </option>
+                                    <option class="bg-black" value="c">
+                                        c
+                                    </option>
+                                    <option class="bg-black" value="d">
+                                        d
+                                    </option>
+                                    <option class="bg-black" value="e">
+                                        e
+                                    </option>
+                                    <option class="bg-black" value="f">
+                                        f
+                                    </option>
+                                </select>
+                                </label>
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="datetime" class="leading-7 text-sm text-gray-400">Date and Time</label>
+                                <input type="datetime-local" id="datetime" name="datetime" placeholder="Date-Time" autocomplete="off"
+                                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent text-base outline-none text-gray-400 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
+                            <button type="submit" id="relative"
+                                class="text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-gray-800 hover:text-black rounded text-lg">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Button to show/hide hidden items -->
+                <div class="flex justify-center">
+                    <button id="toggle-btn"
+                        class="text-white bg-red-700 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                        SHOW MORE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+    <footer class="text-gray-400 bg-gray-900 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap md:text-left text-center order-first">
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-400 hover:text-white">First Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Second Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Third Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-400 hover:text-white">First Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Second Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Third Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-400 hover:text-white">First Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Second Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Third Link</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">SUBSCRIBE</h2>
+                    <div
+                        class="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
+                        <div class="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
+                            <label for="footer-field" class="leading-7 text-sm text-gray-400">Email</label>
+                            <input type="text" id="footer-field" name="footer-field"
+                                class="w-full bg-gray-800 rounded border bg-opacity-40 border-gray-700 focus:bg-transparent focus:ring-2 focus:ring-indigo-900 focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                        <button
+                            class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-red-700 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Submit</button>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-2 md:text-left text-center">get latest updates
+                        <br class="lg:block hidden">waistcoat green juice
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-800 bg-opacity-75">
+            <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+                    <span class="ml-3 text-xl">ECORIDE</span>
+                </a>
+                <p class="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2024 ECORIDE
+
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                    <a class="text-gray-400">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-400">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-400">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-400">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/home/products-edit\app.js"></script>
+    <script src="/static/home/src/homepage.js"></script>
+</body>
+
+</html>

@@ -28,16 +28,17 @@ closeNav.addEventListener('click', () => {
 });
 
 const images = [
-    "pics/3-7-01-scaled.jpg",
-    "pics/electric-scooter-4253790_1280.jpg",
-    "pics/Banner_Home.jpg",
-    "pics/e-bike homepic design2.jpg",
-    "pics/electric-scooter-4253800_1280.jpg"
+    "/static/home/pics/3-7-01-scaled.jpg",
+    "/static/home/pics/electric-scooter-4253790_1280.jpg",
+    "/static/home/pics/Banner_Home.jpg",
+    "/static/home/pics/e-bike homepic design2.jpg",
+    "/static/home/pics/electric-scooter-4253800_1280.jpg"
 ];
 let currentIndex = 0;
 const dynamicImage = document.getElementById("dynamicImage");
 
 function changeImage() {
+    const dynamicImage = document.getElementById("dynamicImage");
     currentIndex = (currentIndex + 1) % images.length;
     dynamicImage.src = images[currentIndex];
 }
