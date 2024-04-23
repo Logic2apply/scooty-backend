@@ -647,7 +647,7 @@
                     const mileage = parseInt(mileageText.match(/\d+/)[0]);
 
                     if (selectedRange === 'select all' || isMileageInRange(mileage, selectedRange)) {
-                        product.style.display = ''; // Show the product if it falls within the selected range
+                        product.style.display = 'block'; // Show the product if it falls within the selected range
                     } else {
                         product.style.display = 'none'; // Hide the product if it doesn't fall within the selected range
                     }

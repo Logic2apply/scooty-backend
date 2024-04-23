@@ -5,8 +5,10 @@ urlpatterns = [
     path("vehicle/", views.vehicle, name="vehicle"),
     path("contact/", views.contact, name="contact"),
     path("feedback/", views.feedback, name="feedback"),
+    path("accessories/", views.accessories, name="accessories"),
     path("book-test-ride/", views.bookTestRide, name="bookTestRide"),
     path("email-subscribe/", views.emailSubscribe, name="emailSubscribe"),
+    path("products/", views.products, name="products"),
     # Bikes
     path("450s", views.b450s, name="450s"),
     path("450x/", views.b450x, name="450x"),

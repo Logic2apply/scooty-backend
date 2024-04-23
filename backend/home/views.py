@@ -1,35 +1,39 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.conf import settings
 from django.core.mail import send_mail
 from home.models import BookRide, Contact, EmailSubscribe
 
+
 # Create your views here.
 def index(request):
-    return render(request, 'home/index.html')
+    return render(request, "home/index.html")
+
 
 def vehicle(request):
-    return render(request, 'home/vehicle.html')
+    return render(request, "home/vehicle.html")
+
 
 def contact(request):
-    if request.method == 'POST':
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
+    if request.method == "POST":
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
 
-        subject = f'Thanks for contacting to Ecoride'
+        subject = f"Thanks for contacting to Ecoride"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email]
-        send_mail( subject, message, email_from, recipient_list )
+        send_mail(subject, message, email_from, recipient_list)
 
-        subject = f'{fname} {lname} contacted to Ecoride'
+        subject = f"{fname} {lname} contacted to Ecoride"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [settings.EMAIL_HOST_USER]
-        send_mail( subject, message, email_from, recipient_list )
+        send_mail(subject, message, email_from, recipient_list)
 
         contact = Contact(fname=fname, lname=lname, email=email, message=message)
         contact.save()
-    return render(request, 'home/contact.html')
+    return render(request, "home/contact.html")
 
 
 # Bikes
@@ -47,6 +51,7 @@ def contact(request):
 # path("storie/", views.bstorie, name="storie"),
 # path("stormzx/", views.bstormzx, name="stormzx"),
 
+
 def bookTestRide(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -61,13 +66,21 @@ def bookTestRide(request):
         message = f"User: {name} successfully booked Test Ride of BikeType {biketype} for date: {datetimef}.\nEmail: {email}\nPhone:{contact}\nOther: {other}\n\nECORIDE"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email, settings.EMAIL_HOST_USER]
-        send_mail( subject, message, email_from, recipient_list )
+        send_mail(subject, message, email_from, recipient_list)
         print("Mail sent successfully")
 
-        bookride = BookRide(name=name, email=email, contact=contact, other=other, biketype=biketype, datetimef=datetimef)
+        bookride = BookRide(
+            name=name,
+            email=email,
+            contact=contact,
+            other=other,
+            biketype=biketype,
+            datetimef=datetimef,
+        )
         bookride.save()
 
         return redirect("/")
+
 
 def feedback(request):
     if request.method == "POST":
@@ -78,10 +91,16 @@ def feedback(request):
         subject = f"Feedback from {name}"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [settings.EMAIL_HOST_USER]
-        send_mail( subject, f"Message: {message}\n\nSent by:{email}\nECORIDE", email_from, recipient_list )
+        send_mail(
+            subject,
+            f"Message: {message}\n\nSent by:{email}\nECORIDE",
+            email_from,
+            recipient_list,
+        )
         print("Mail sent successfully")
         return redirect("/feedback/")
     return render(request, "home/feedback.html")
+
 
 def emailSubscribe(request):
     if request.method == "POST":
@@ -89,50 +108,182 @@ def emailSubscribe(request):
 
         subscribe = EmailSubscribe(email=email)
         subscribe.save()
-        send_mail("Subscribed to ECORIDE", f"Message: {email} subscribed to ECORIDE", settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER, email])
+        send_mail(
+            "Subscribed to ECORIDE",
+            f"Message: {email} subscribed to ECORIDE",
+            settings.EMAIL_HOST_USER,
+            [settings.EMAIL_HOST_USER, email],
+        )
 
         return redirect("/")
     return redirect("/")
 
+
+def accessories(request):
+    return render(request, "home/accessories.html")
+
+
+def products(request):
+    products = {
+        "items": [
+            {
+                "sys": {"id": "1"},
+                "fields": {
+                    "title": "Galaxy S10 5G",
+                    "price": 910.99,
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
+                },
+            },
+            {
+                "sys": {"id": "2"},
+                "fields": {
+                    "title": "Galaxy S10+",
+                    "price": 812.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "3"},
+                "fields": {
+                    "title": "Galaxy S10",
+                    "price": 712.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "4"},
+                "fields": {
+                    "title": "Galaxy S10e",
+                    "price": 622.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "5"},
+                "fields": {
+                    "title": "Galaxy A2 Core",
+                    "price": 688.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "6"},
+                "fields": {
+                    "title": "Galaxy M30",
+                    "price": 532.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "7"},
+                "fields": {
+                    "title": "Galaxy M20",
+                    "price": 545.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "8"},
+                "fields": {
+                    "title": "Galaxy M10",
+                    "price": 440.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "9"},
+                "fields": {
+                    "title": "Galaxy A80",
+                    "price": 386.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "10"},
+                "fields": {
+                    "title": "Galaxy A70",
+                    "price": 378.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "11"},
+                "fields": {
+                    "title": "Galaxy A60",
+                    "price": 289.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+            {
+                "sys": {"id": "12"},
+                "fields": {
+                    "title": "Galaxy A30",
+                    "price": 248.99,
+                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                },
+            },
+        ]
+    }
+    return JsonResponse(products)
+
+
 def about(request):
     return render(request, "home/about.html")
 
+
 def b450s(request):
-    return render(request, 'home/bikes/450s.html')
+    return render(request, "home/bikes/450s.html")
+
 
 def b450x(request):
-    return render(request, 'home/bikes/450x.html')
+    return render(request, "home/bikes/450x.html")
 
 
 def baurali(request):
     return render(request, "home/bikes/aurali.html")
 
+
 def bezgo(request):
     return render(request, "home/bikes/ezgo.html")
+
 
 def bfalcon(request):
     return render(request, "home/bikes/falcon.html")
 
+
 def bkriti(request):
     return render(request, "home/bikes/kriti.html")
+
 
 def blithinoli(request):
     return render(request, "home/bikes/lithinoli.html")
 
+
 def bloev(request):
     return render(request, "home/bikes/loev.html")
+
 
 def bminilithino(request):
     return render(request, "home/bikes/minilithino.html")
 
+
 def bone(request):
     return render(request, "home/bikes/one.html")
+
 
 def broma(request):
     return render(request, "home/bikes/roma.html")
 
+
 def bstorie(request):
     return render(request, "home/bikes/storie.html")
+
 
 def bstormzx(request):
     return render(request, "home/bikes/stormzx.html")
