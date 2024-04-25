@@ -41,7 +41,7 @@ def signup(request):
     return redirect("index")
 
 
-@login_required(redirect_field_name="signin")
+@login_required(login_url="/auth/signin/")
 def signout(request):
     logout(request)
     messages.success(request, "You are now logged out!")

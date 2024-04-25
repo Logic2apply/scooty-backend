@@ -64,15 +64,39 @@
                         <a href="/">Home</a>
                     </li>
                     <li class="hover:underline underline-offset-4 decoration-2 decoration-red-500 py-2 rounded-lg px-5">
-                        <a href="/accessories/">accessories</a>
+                        <a href="/accessories/">Accessories</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="hover:underline underline-offset-4 decoration-2 decoration-red-500 py-2 rounded-lg px-5">
-                        <a href="/auth/signin/">login</a>
+                        <a href="/auth/signout/">Logout</a>
                     </li>
+                        
+                    {% else %}
+                    <li class="hover:underline underline-offset-4 decoration-2 decoration-red-500 py-2 rounded-lg px-5">
+                        <a href="/auth/signin/">Login</a>
+                    </li>
+                        
+                    {% endif %}
                 </ul>
             </div>
         </nav>
     </div>
+
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+        <p class="font-bold">{{ message.tags }}</p>
+        <p class="text-sm">{{ message }}</p>
+    </div>
+    
+    {% else %}
+    <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert">
+        <p class="font-bold">{{ message.tags }}</p>
+        <p class="text-sm">{{ message }}</p>
+    </div>
+    
+    {% endif %}
+    {% endfor %}
     <hr>
 
     <div class="flex justify-center bg-black p-8 ">

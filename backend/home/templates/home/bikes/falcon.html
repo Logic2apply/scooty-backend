@@ -35,7 +35,7 @@
         }
 
         .contr {
-            margin-top: 68px;
+
             width: 100%;
             height: 150vh;
             background-size: cover;
@@ -367,8 +367,7 @@
 </head>
 
 <body>
-    <header
-        class="fixed top-0 left-0 right-0  z-50 text-gray-400 bg-gray-950 body-font transition-all duration-500 ease-in-out">
+    <header class="z-50 text-gray-400 bg-gray-950 body-font transition-all duration-500 ease-in-out">
         <div id="navContainer" class="container  flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
             <a href="#" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
                 <span class="ml-3 text-xl">ECORIDE</span>
@@ -378,7 +377,11 @@
                 <a href="/vehicle/" class="nav-link ">VEHICLES</a>
                 <a href="/accessories/" class="nav-link">ACCESSORIES</a>
                 <a href="/contact/" class="nav-link">CONTACT US</a>
-                <a href="/signin/" class="nav-link">LOGIN</a>
+                {% if user.is_authenticated %}
+                <a href="/auth/signout/" class="nav-link">LOGOUT</a>
+                {% else %}
+                <a href="/auth/signout/" class="nav-link">LOGIN</a>
+                {% endif %}
             </div>
             <button id="toggleNav"
                 class="md:hidden inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-red-600 hover:text-black rounded text-base mt-4 md:mt-0">Menu
@@ -401,10 +404,32 @@
             <div class=" decoration-2 text-white flex flex-col items-center justify-center h-full">
                 <a href="/accessories/" class="sidebar-link my-4">ACCESSORIES</a>
                 <a href="/contact/" class="sidebar-link my-4">CONTACT US</a>
-                <a href="/signin/" class="sidebar-link my-4">LOGIN</a>
+                {% if user.is_authenticated %}
+
+                <a href="/auth/signout/" class="sidebar-link my-4">LOGOUT</a>
+                {% else %}
+
+                <a href="/auth/signin/" class="sidebar-link my-4">LOGIN</a>
+                {% endif %}
             </div>
         </div>
     </header>
+
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+        <p class="font-bold">{{ message.tags }}</p>
+        <p class="text-sm">{{ message }}</p>
+    </div>
+
+    {% else %}
+    <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert">
+        <p class="font-bold">{{ message.tags }}</p>
+        <p class="text-sm">{{ message }}</p>
+    </div>
+
+    {% endif %}
+    {% endfor %}
     <hr>
 
     <div class="contr " id="bike">

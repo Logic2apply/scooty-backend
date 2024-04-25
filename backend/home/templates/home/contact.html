@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <header
-        class="fixed top-0 left-0 right-0  z-50 text-gray-400 bg-gray-950 body-font transition-all duration-500 ease-in-out">
+    <header class="z-50 text-gray-400 bg-gray-950 body-font transition-all duration-500 ease-in-out">
         <div id="navContainer" class="container  flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
             <a href="#" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -25,7 +24,11 @@
                 <a href="/vehicle/" class="nav-link ">VEHICLES</a>
                 <a href="/accessories/" class="nav-link">ACCESSORIES</a>
                 <a href="#about" class="nav-link">ABOUT US</a>
-                <a href="/signin/" class="nav-link">LOGIN</a>
+                {% if user.is_authenticated %}
+                <a href="/auth/signout/" class="nav-link">LOGOUT</a>
+                {% else %}
+                <a href="/auth/signout/" class="nav-link">LOGIN</a>
+                {% endif %}
             </div>
             <button id="toggleNav"
                 class="md:hidden inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-red-600 hover:text-black rounded text-base mt-4 md:mt-0">Menu
@@ -50,10 +53,34 @@
                 <a href="/accessories/" class="sidebar-link my-4">ACCESSORIES</a>
                 <a href="#about" class="sidebar-link my-4">ABOUT US</a>
                 <a href="/contact/" class="sidebar-link my-4">CONTACT US</a>
-                <a href="/signin/" class="sidebar-link my-4">LOGIN</a>
+                {% if user.is_authenticated %}
+                    
+                <a href="/auth/signout/" class="sidebar-link my-4">LOGOUT</a>
+                {% else %}
+                    
+                <a href="/auth/signin/" class="sidebar-link my-4">LOGIN</a>
+                {% endif %}
             </div>
         </div>
     </header>
+
+
+    {% for message in messages %}
+    {% if message.tags == "success" %}
+    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+        <p class="font-bold">{{ message.tags }}</p>
+        <p class="text-sm">{{ message }}</p>
+    </div>
+
+    {% else %}
+    <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert">
+        <p class="font-bold">{{ message.tags }}</p>
+        <p class="text-sm">{{ message }}</p>
+    </div>
+
+    {% endif %}
+    {% endfor %}
+
     <section class="bg-white dark:bg-gray-900">
         <div class="container px-6 py-12 mx-auto">
             <div>
@@ -95,7 +122,8 @@
 
                         <h2 class="mt-4 text-base font-medium text-gray-800 dark:text-white">chat with us</h2>
                         <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Our friendly team is here to help.</p>
-                        <a class="mt-2 text-sm text-blue-500 dark:text-blue-400" href="http://api.whatsapp.com/send?phone=917973532857">Start new chat</a>
+                        <a class="mt-2 text-sm text-blue-500 dark:text-blue-400"
+                            href="http://api.whatsapp.com/send?phone=917973532857">Start new chat</a>
                     </div>
 
                     <div>
@@ -137,20 +165,23 @@
                             <div class="flex-1 px-2">
                                 <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">First Name</label>
                                 <input type="text" placeholder="John"
-                                    class="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" name="fname"/>
+                                    class="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                    name="fname" />
                             </div>
 
                             <div class="flex-1 px-2 mt-4 md:mt-0">
                                 <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Last Name</label>
                                 <input type="text" placeholder="Doe"
-                                    class="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" name="lname" />
+                                    class="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                    name="lname" />
                             </div>
                         </div>
 
                         <div class="mt-4">
                             <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email address</label>
                             <input type="email" placeholder="@example.com"
-                                class="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" name="email"/>
+                                class="block w-full px-5 py-2.5 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                name="email" />
                         </div>
 
                         <div class="w-full mt-4">

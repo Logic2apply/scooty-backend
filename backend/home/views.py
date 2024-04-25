@@ -3,7 +3,8 @@ from django.shortcuts import redirect, render
 from django.conf import settings
 from django.core.mail import send_mail
 from home.models import BookRide, Contact, EmailSubscribe
-
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -14,25 +15,30 @@ def vehicle(request):
     return render(request, "home/vehicle.html")
 
 
+@login_required(login_url="/auth/signin/")
 def contact(request):
     if request.method == "POST":
-        fname = request.POST.get("fname")
-        lname = request.POST.get("lname")
-        email = request.POST.get("email")
-        message = request.POST.get("message")
+        try:
+            fname = request.POST.get("fname")
+            lname = request.POST.get("lname")
+            email = request.POST.get("email")
+            message = request.POST.get("message")
 
-        subject = f"Thanks for contacting to Ecoride"
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [email]
-        send_mail(subject, message, email_from, recipient_list)
+            subject = f"Thanks for contacting to Ecoride"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [email]
+            send_mail(subject, message, email_from, recipient_list)
 
-        subject = f"{fname} {lname} contacted to Ecoride"
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [settings.EMAIL_HOST_USER]
-        send_mail(subject, message, email_from, recipient_list)
+            subject = f"{fname} {lname} contacted to Ecoride"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [settings.EMAIL_HOST_USER]
+            send_mail(subject, message, email_from, recipient_list)
 
-        contact = Contact(fname=fname, lname=lname, email=email, message=message)
-        contact.save()
+            contact = Contact(fname=fname, lname=lname, email=email, message=message)
+            contact.save()
+            messages.success(request, "Thanks for contacting to Ecoride")
+        except:
+            messages.error(request, "Something went wrong")
     return render(request, "home/contact.html")
 
 
@@ -52,73 +58,88 @@ def contact(request):
 # path("stormzx/", views.bstormzx, name="stormzx"),
 
 
+@login_required(login_url="/auth/signin/")
 def bookTestRide(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        contact = request.POST.get("contact")
-        other = request.POST.get("other")
-        biketype = request.POST.get("biketype")
-        datetimef = request.POST.get("datetime")
+        try:
+            name = request.POST.get("name")
+            email = request.POST.get("email")
+            contact = request.POST.get("contact")
+            other = request.POST.get("other")
+            biketype = request.POST.get("biketype")
+            datetimef = request.POST.get("datetime")
 
-        # Email this information
-        subject = f"Test Ride of BikeType {biketype} booked for date: {datetimef}"
-        message = f"User: {name} successfully booked Test Ride of BikeType {biketype} for date: {datetimef}.\nEmail: {email}\nPhone:{contact}\nOther: {other}\n\nECORIDE"
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [email, settings.EMAIL_HOST_USER]
-        send_mail(subject, message, email_from, recipient_list)
-        print("Mail sent successfully")
+            # Email this information
+            subject = f"Test Ride of BikeType {biketype} booked for date: {datetimef}"
+            message = f"User: {name} successfully booked Test Ride of BikeType {biketype} for date: {datetimef}.\nEmail: {email}\nPhone:{contact}\nOther: {other}\n\nECORIDE"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [email, settings.EMAIL_HOST_USER]
+            send_mail(subject, message, email_from, recipient_list)
+            print("Mail sent successfully")
 
-        bookride = BookRide(
-            name=name,
-            email=email,
-            contact=contact,
-            other=other,
-            biketype=biketype,
-            datetimef=datetimef,
-        )
-        bookride.save()
+            bookride = BookRide(
+                name=name,
+                email=email,
+                contact=contact,
+                other=other,
+                biketype=biketype,
+                datetimef=datetimef,
+            )
+            bookride.save()
+            messages.success(request, "Ride Booked Successfully")
+            return redirect("/")
+        except:
+            messages.error(request, "Something went wrong")
+            return redirect("/")
 
-        return redirect("/")
 
-
+@login_required(login_url="/auth/signin/")
 def feedback(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        message = request.POST.get("message")
+        try:
+            name = request.POST.get("name")
+            email = request.POST.get("email")
+            message = request.POST.get("message")
 
-        subject = f"Feedback from {name}"
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [settings.EMAIL_HOST_USER]
-        send_mail(
-            subject,
-            f"Message: {message}\n\nSent by:{email}\nECORIDE",
-            email_from,
-            recipient_list,
-        )
-        print("Mail sent successfully")
-        return redirect("/feedback/")
+            subject = f"Feedback from {name}"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [settings.EMAIL_HOST_USER]
+            send_mail(
+                subject,
+                f"Message: {message}\n\nSent by:{email}\nECORIDE",
+                email_from,
+                recipient_list,
+            )
+            messages.success(request, "Feedback sent successfully")
+            return redirect("/feedback/")
+        except:
+            messages.error(request, "Something went wrong")
     return render(request, "home/feedback.html")
 
 
+@login_required(login_url="/auth/signin/")
 def emailSubscribe(request):
     if request.method == "POST":
-        email = request.POST.get("emails")
+        try:
+            email = request.POST.get("emails")
 
-        subscribe = EmailSubscribe(email=email)
-        subscribe.save()
-        send_mail(
-            "Subscribed to ECORIDE",
-            f"Message: {email} subscribed to ECORIDE",
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_HOST_USER, email],
-        )
-
-        return redirect("/")
+            subscribe = EmailSubscribe(email=email)
+            subscribe.save()
+            send_mail(
+                "Subscribed to ECORIDE",
+                f"Message: {email} subscribed to ECORIDE",
+                settings.EMAIL_HOST_USER,
+                [settings.EMAIL_HOST_USER, email],
+            )
+            messages.success(request, "You Subscribed to Ecoride Successfully!")
+            return redirect("/")
+        except:
+            messages.error(request, "Something went wrong")
+            return redirect("/")
     return redirect("/")
 
 
+@login_required(login_url="/auth/signin/")
 def accessories(request):
     return render(request, "home/accessories.html")
 
@@ -145,7 +166,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy S10+",
                     "price": 812.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -153,7 +180,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy S10",
                     "price": 712.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -161,7 +194,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy S10e",
                     "price": 622.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -169,7 +208,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy A2 Core",
                     "price": 688.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -177,7 +222,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy M30",
                     "price": 532.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -185,7 +236,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy M20",
                     "price": 545.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -193,7 +250,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy M10",
                     "price": 440.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -201,7 +264,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy A80",
                     "price": 386.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -209,7 +278,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy A70",
                     "price": 378.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -217,7 +292,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy A60",
                     "price": 289.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
             {
@@ -225,7 +306,13 @@ def products(request):
                 "fields": {
                     "title": "Galaxy A30",
                     "price": 248.99,
-                    "image": {"fields": {"file": {"url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"}}},
+                    "image": {
+                        "fields": {
+                            "file": {
+                                "url": "https://www.91-cdn.com/hub/wp-content/uploads/2023/11/Samsung-Galaxy-S24-series-1.jpg"
+                            }
+                        }
+                    },
                 },
             },
         ]
